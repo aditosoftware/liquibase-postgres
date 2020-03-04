@@ -25,5 +25,3 @@ RUN mkdir -p /opt/liquibase && \
     ln -s /opt/liquibase/liquibase /usr/local/bin/liquibase
 
 ENTRYPOINT [ "/run.sh" ]
-
-liq_changefile_data
