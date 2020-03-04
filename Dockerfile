@@ -1,8 +1,8 @@
 FROM openjdk:11.0.3
 
-ARG liquibase_version=3.6.3
-ARG liquibase_download_url=https://github.com/liquibase/liquibase/releases/download/liquibase-parent-${liquibase_version}
-ARG tarfile=liquibase-${liquibase_version}-bin.tar.gz
+ARG liquibase_version=3.8.7
+ARG liquibase_download_url=https://github.com/liquibase/liquibase/releases/download/v${liquibase_version}
+ARG tarfile=liquibase-${liquibase_version}.tar.gz
 
 WORKDIR /workspace
 
