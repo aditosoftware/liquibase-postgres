@@ -6,8 +6,8 @@ ARG tarfile=liquibase-${liquibase_version}.tar.gz
 
 WORKDIR /workspace
 
-ENV LIQUIBASE_CLASSPATH=${LIQUIBASE_CLASSPATH:-/opt/jdbc-driver/postgresql-42.2.10.jar}\
-    LIQUIBASE_DRIVER=${LIQUIBASE_DRIVER:-org.postgresql.Driver}
+ENV LIQUIBASE_CLASSPATH=${LIQUIBASE_CLASSPATH:-/opt/liquibase/lib/postgresql-42.2.10.jar}
+ENV LIQUIBASE_DRIVER=${LIQUIBASE_DRIVER:-org.postgresql.Driver}
 
 ADD ${liquibase_download_url}/${tarfile} /tmp/${tarfile}
 ADD https://jdbc.postgresql.org/download/postgresql-42.2.10.jar /tmp/postgresql-42.2.10.jar
@@ -19,9 +19,10 @@ RUN mkdir -p /opt/liquibase && \
     chmod +x /run.sh && \
     tar -xzf /tmp/${tarfile} -C /opt/liquibase/ && \
     mkdir /opt/jdbc-driver/ -p && \
-    cp /tmp/postgresql-42.2.10.jar /opt/jdbc-driver/ && \
-    chmod +x /opt/liquibase/liquibase && \
+    cp /tmp/postgresql-42.2.10.jar /opt/liquibase/lib/ && \
+    chmod +x /opt/liquibase/liquibase && \ 
     rm /tmp/${tarfile} /tmp/postgresql-42.2.10.jar -Rf && \
-    ln -s /opt/liquibase/liquibase /usr/local/bin/liquibase
+    ln -s /opt/liquibase/liquibase /usr/local/bin/liquibase && \ 
+    chmod 777 /opt/liquibase/lib/postgresql-42.2.10.jar
 
 ENTRYPOINT [ "/run.sh" ]
